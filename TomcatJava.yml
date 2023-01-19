@@ -20,7 +20,18 @@
         home: /opt/tomcat
         shell: /bin/false
         state: present
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: /tmp
+        state: directory
+    - name: Recursively change ownership of a directory
+      ansible.builtin.file:
+        path: /tmp
+        state: directory
+        recurse: yes
+        owner: tomcat
+        group: tomcat
     - name: download tomcat 10.1.4
       ansible.builtin.get_url:
         url: https://www-eu.apache.org/dist/tomcat/tomcat-10/v10.1.4/bin/apache-tomcat-10.1.4.tar.gz
-        dest: /temp
+        dest: /tmp/apache-tomcat-10.1.4
